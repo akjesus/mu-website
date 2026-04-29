@@ -1,6 +1,7 @@
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Swal from "sweetalert2";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -16,8 +17,7 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Your message has been submitted successfully!");
-    // Here you can integrate with backend or email service like EmailJS
+          Swal.fire("Success!", "Your message has been submitted successfully!", "success");
   };
 
   return (

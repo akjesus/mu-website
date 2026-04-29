@@ -155,7 +155,7 @@ export default function Campus() {
                 quote:
                   "Maduka University has been an incredible journey. The campus facilities are top-notch, and the community is so welcoming. I've made lifelong friends and gained invaluable skills.",
                 image:
-                  "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
+                  "/images/stu1.jpg",
               },
               {
                 name: "Michael Chen",
@@ -204,7 +204,7 @@ export default function Campus() {
           <div className="grid md:grid-cols-4 gap-4">
             {[
               "https://images.unsplash.com/photo-1564981797816-1043664bf78d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-              "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+             "/images/stu2.jpg",
               "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
               "https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
             ].map((image, index) => (

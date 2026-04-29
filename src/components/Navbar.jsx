@@ -47,6 +47,10 @@ export default function Navbar() {
       name: "Library",
       href: "https://library.madukauniversity.edu.ng/",
     },
+    {
+      name: "Students Results",
+      href: "https://result.madukauniversity.edu.ng/",
+    },
   ];
 
   return (
@@ -107,13 +111,13 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-white shadow-md">
-          <nav className="flex flex-col space-y-4 p-4">
+          <nav className="grid grid-cols-2 gap-4 p-4">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-gray-700 font-medium hover:text-blue-600"
+                className="text-gray-700 font-medium hover:text-blue-600 text-center py-2 px-3 rounded hover:bg-gray-100 transition"
               >
                 {link.name}
               </a>

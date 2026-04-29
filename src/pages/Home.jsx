@@ -165,6 +165,24 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section id="campus-tour" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-10 text-center">Campus Tour</h2>
+          <p className="text-gray-600 max-w-3xl mx-auto text-center mb-12">
+            Take a virtual tour around Maduka University.
+          </p>
+          <div className="relative w-full px-4 md:px-6 lg:px-8 flex justify-center">
+            <div className="w-full max-w-5xl h-[70vh] relative overflow-hidden">
+              <iframe
+                className="w-full h-full rounded-2xl"
+                src="https://res.cloudinary.com/dkkxdylvp/video/upload/v1756479316/About_MU_school_fcmohw.mp4"
+                title="Maduka University Virtual Campus Tour"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Business School Section */}
       <section
         id="business-school"
@@ -228,11 +246,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Courses Section */}
       {/* Academic Programmes Section */}
       <section id="academics" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-10 text-center">Our Faculties</h2>
+          <h2 className="text-3xl font-bold mb-10 text-center">
+            Our Faculties
+          </h2>
 
           {/* Undergraduate Programmes */}
           <div className="mb-12">

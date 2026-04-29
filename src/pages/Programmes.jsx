@@ -107,14 +107,14 @@ export default function Courses() {
                 </div>
 
                 {/* Teacher Info */}
-                <div className="mt-6 flex items-center gap-3">
+                {/* <div className="mt-6 flex items-center gap-3">
                   <Users className="w-10 h-10 text-[#00356B] bg-blue-100 rounded-full p-2" />
                   <div>
                     <p className="font-medium text-black-800">
                       {course.teacher}
                     </p>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Enroll Button */}
                 <div className="mt-6 text-center">

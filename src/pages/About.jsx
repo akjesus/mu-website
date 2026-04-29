@@ -61,7 +61,7 @@ export default function About() {
           <div>
             <BookOpen className="w-12 h-12 mx-auto" />
             <h3 className="mt-4 text-2xl font-bold">19+</h3>
-            <p className="mt-2">Programs Offered</p>
+            <p className="mt-2">Programmes Offered</p>
           </div>
         </div>
       </section>
@@ -86,7 +86,7 @@ export default function About() {
             {
               name: "Mr. John M.U. Omeje",
               role: "Registrar",
-              img: "https://media.licdn.com/dms/image/v2/D5603AQFaIZKVhnof1Q/profile-displayphoto-shrink_200_200/B56ZXc8IjcGQAc-/0/1743168506928?e=2147483647&v=beta&t=R_Omd_4gRJdmIOyn2dpn2HVK6aD-NDPYOhb6WTXAnic",
+              img: "/images/omeje.jpg",
             },
           ].map((faculty, index) => (
             <div
