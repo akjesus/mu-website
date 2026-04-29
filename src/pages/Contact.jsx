@@ -103,7 +103,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-blue-700 transition"
+                className="w-full bg-[#00356B] text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#002a55] transition"
               >
                 Send Message
               </button>
@@ -134,20 +134,19 @@ export default function Contact() {
               <Mail className="w-8 h-8 text-red-600" />
               <div>
                 <h3 className="text-lg font-semibold">Email</h3>
-                <p className="text-gray-600">info@eduverse.edu</p>
+                <p className="text-gray-600">info@madukauniversity.edu.ng</p>
               </div>
             </div>
 
             {/* Google Map Embed */}
             <div className="mt-6">
               <iframe
-                title="EduVerse Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.938257745049!2d77.21672131492184!3d28.64480098241188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd4d6f57dbeb%3A0x9d46f1c8b4c6c9e!2sNew%20Delhi!5e0!3m2!1sen!2sin!4v1675257850077!5m2!1sen!2sin"
-                width="100%"
-                height="250"
-                allowFullScreen=""
-                loading="lazy"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7924.7372988753295!2d7.506386433862307!3d6.724793436841423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1044c131a634b349%3A0xdfffeb4bdc1aa176!2sMaduka%20University!5e0!3m2!1sen!2sng!4v1777484068593!5m2!1sen!2sng"
+                width="600"
+                height="450"
                 className="rounded-xl border"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
           </div>

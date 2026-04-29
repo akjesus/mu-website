@@ -56,10 +56,10 @@ export default function Home() {
                 Apply Now
               </a>
               <a
-                href="/courses"
-                className="px-6 py-3 border border-white rounded-2xl font-semibold hover:bg-white hover:text-blue-700"
+                href="/programmes"
+                className="px-6 py-3 border border-white rounded-2xl font-semibold hover:bg-white hover:text-[#00356B] transition"
               >
-                Explore Courses
+                Explore Programmes
               </a>
             </div>
           </div>
@@ -85,14 +85,14 @@ export default function Home() {
           <div className="mt-12 grid md:grid-cols-3 gap-8">
             <div className="p-6 bg-white shadow rounded-2xl">
               <GraduationCap className="w-12 h-12 text-blue-600 mx-auto" />
-              <h3 className="mt-4 text-xl font-semibold">Expert Faculty</h3>
+              <h3 className="mt-4 text-xl font-semibold">Expert Facilities</h3>
               <p className="mt-2 text-gray-600">
                 Learn from experienced professors and industry leaders.
               </p>
             </div>
             <div className="p-6 bg-white shadow rounded-2xl">
               <Laptop className="w-12 h-12 text-indigo-600 mx-auto" />
-              <h3 className="mt-4 text-xl font-semibold">Online Learning</h3>
+              <h3 className="mt-4 text-xl font-semibold">Serene Environment</h3>
               <p className="mt-2 text-gray-600">
                 Flexible and interactive online classes for all courses.
               </p>
@@ -101,7 +101,7 @@ export default function Home() {
               <CreditCard className="w-12 h-12 text-green-600 mx-auto" />
               <h3 className="mt-4 text-xl font-semibold">Easy Admissions</h3>
               <p className="mt-2 text-gray-600">
-                Apply and pay your admission fees securely with Razorpay.
+                Apply and pay your admission fees securely with Paystack.
               </p>
             </div>
           </div>
@@ -113,8 +113,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-10 text-center">Campus Life</h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-center mb-12">
             Stay updated with the latest happenings, events, and activities at
-            Maduka University. This section will be populated with real-time
-            data from our API endpoint.
+            Maduka University.
           </p>
           <div className="grid md:grid-cols-3 gap-8">
             {/* Placeholder for recent happenings - to be replaced with API data */}
@@ -154,6 +153,15 @@ export default function Home() {
                 </div>
               </div>
             ))}
+            <div className="col-span-full text-center">
+              <a
+                href="/campus-life"
+                rel="noopener noreferrer"
+                className="inline-block mt-2 px-6 py-3 bg-[#00356B] text-white text-center rounded-2xl font-semibold hover:bg-[#002a55] transition"
+              >
+                More about Campus Life
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -212,7 +220,7 @@ export default function Home() {
             </div>
             <div className="text-center">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                src="/images/bus.jpg"
                 alt="Business School Students"
                 className="rounded-2xl shadow-lg max-w-full h-auto"
               />
@@ -224,9 +232,7 @@ export default function Home() {
       {/* Academic Programmes Section */}
       <section id="academics" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            Our Facuties
-          </h2>
+          <h2 className="text-3xl font-bold mb-10 text-center">Our Faculties</h2>
 
           {/* Undergraduate Programmes */}
           <div className="mb-12">
@@ -267,30 +273,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-      <section id="courses" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-10">Our Popular Courses</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              "Computer Science",
-              "Business Administration",
-              "Data Science",
-            ].map((course, index) => (
-              <div
-                key={index}
-                className="p-6 border rounded-2xl shadow hover:shadow-lg transition"
-              >
-                <BookOpen className="w-12 h-12 text-indigo-600 mx-auto" />
-                <h3 className="mt-4 text-xl font-semibold">{course}</h3>
-                <p className="mt-2 text-gray-600">
-                  Learn {course.toLowerCase()} with expert guidance and hands-on
-                  projects.
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -384,31 +366,12 @@ export default function Home() {
                         <div className="mt-4 space-y-4">
                           <div>
                             <h5 className="font-semibold text-gray-700">
-                              School of Computing:
+                              Faculty of Computing & Engineering:
                             </h5>
                             <ul className="list-disc list-inside text-sm text-gray-500 ml-4">
                               <li>B.Sc. Computer Science – ₦900,000</li>
                               <li>B.Sc. Cyber Security – ₦900,000</li>
                               <li>B.Sc. Software Engineering – ₦900,000</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <h5 className="font-semibold text-gray-700">
-                              School of Business & Social Sciences:
-                            </h5>
-                            <ul className="list-disc list-inside text-sm text-gray-500 ml-4">
-                              <li>B.Sc. Accounting – ₦800,000</li>
-                              <li>B.Sc. Economics – ₦800,000</li>
-                              <li>B.Sc. Mass Communication – ₦800,000</li>
-                              <li>B.Sc. International Relations – ₦800,000</li>
-                              <li>B.Sc. Transport Management – ₦800,000</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <h5 className="font-semibold text-gray-700">
-                              School of Engineering:
-                            </h5>
-                            <ul className="list-disc list-inside text-sm text-gray-500 ml-4">
                               <li>B.Eng. Civil Engineering – ₦900,000</li>
                               <li>B.Eng. Mechanical Engineering – ₦900,000</li>
                               <li>
@@ -423,17 +386,22 @@ export default function Home() {
                           </div>
                           <div>
                             <h5 className="font-semibold text-gray-700">
-                              College of Medical Science:
+                              Faculty of Business & Social Sciences:
                             </h5>
                             <ul className="list-disc list-inside text-sm text-gray-500 ml-4">
-                              <li>MBBS – Medicine and Surgery – ₦4,210,000</li>
+                              <li>B.Sc. Accounting – ₦800,000</li>
+                              <li>B.Sc. Economics – ₦800,000</li>
+                              <li>B.Sc. Mass Communication – ₦800,000</li>
+                              <li>B.Sc. International Relations – ₦800,000</li>
+                              <li>B.Sc. Transport Management – ₦800,000</li>
                             </ul>
                           </div>
                           <div>
                             <h5 className="font-semibold text-gray-700">
-                              School of Health Sciences:
+                              College of Medicine & Health Sciences:
                             </h5>
                             <ul className="list-disc list-inside text-sm text-gray-500 ml-4">
+                              <li>MBBS – Medicine and Surgery – ₦4,210,000</li>
                               <li>B.Sc. Radiography – ₦1,200,000</li>
                               <li>
                                 BMLS – Medical Laboratory Science – ₦1,200,000
@@ -444,7 +412,7 @@ export default function Home() {
                           </div>
                           <div>
                             <h5 className="font-semibold text-gray-700">
-                              School of Nursing Science:
+                              Faculty of Nursing Sciences:
                             </h5>
                             <ul className="list-disc list-inside text-sm text-gray-500 ml-4">
                               <li>B.Sc. Nursing – ₦1,710,000</li>
@@ -452,7 +420,7 @@ export default function Home() {
                           </div>
                           <div>
                             <h5 className="font-semibold text-gray-700">
-                              School of Pharmacy:
+                              Faculty of Pharmacy:
                             </h5>
                             <ul className="list-disc list-inside text-sm text-gray-500 ml-4">
                               <li>Pharm D – ₦1,710,000</li>
@@ -460,7 +428,7 @@ export default function Home() {
                           </div>
                           <div>
                             <h5 className="font-semibold text-gray-700">
-                              School of Law:
+                              Faculty of Law:
                             </h5>
                             <ul className="list-disc list-inside text-sm text-gray-500 ml-4">
                               <li>LLB – Law – ₦1,710,000</li>

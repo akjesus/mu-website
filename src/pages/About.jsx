@@ -74,17 +74,17 @@ export default function About() {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 text-center">
           {[
             {
-              name: "Prof. Charles Ogbolobo",
+              name: "Prof. Charles Ogbulogo",
               role: "Vice Chancellor",
-              img: "https://llim.edu/wp-content/uploads/2024/08/Asha-Varma.jpg",
+              img: "/images/veecee.jpg",
             },
             {
               name: "Dr. Samuel Maduka Onyishi",
               role: "Pro Chancellor",
-              img: "https://doximity-res.cloudinary.com/images/f_auto,q_auto,t_public_profile_photo_320x320/y385ierclzfbba2wftqs/rajesh-malhotra-md-lee-s-summit-mo.jpg",
+              img: "/images/sam.webp",
             },
             {
-              name: "Dr. Omeje",
+              name: "Mr. John M.U. Omeje",
               role: "Registrar",
               img: "https://media.licdn.com/dms/image/v2/D5603AQFaIZKVhnof1Q/profile-displayphoto-shrink_200_200/B56ZXc8IjcGQAc-/0/1743168506928?e=2147483647&v=beta&t=R_Omd_4gRJdmIOyn2dpn2HVK6aD-NDPYOhb6WTXAnic",
             },
@@ -104,6 +104,62 @@ export default function About() {
               <p className="text-black-600">{faculty.role}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* University Anthem */}
+      <section className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center text-[#00356B] mb-8">
+            Maduka University Anthem
+          </h2>
+          <div className="text-center mb-8">
+          </div>
+          <div className="bg-gray-50 rounded-2xl p-8 max-w-4xl mx-auto">
+            <div className="text-gray-800 leading-relaxed whitespace-pre-line text-center">
+              <p>• WE HOLD THE KEY</p>
+              <p>• FOR KNOWLEDGE AND SKILLS</p>
+              <p>• WE HOLD THE KEY</p>
+              <p>• FOR TOTAL INDEPENDENCE</p>
+              <p>• WE HOLD THE KEY</p>
+              <p>• FOR KNOWLEDGE AND SKILLS</p>
+              <p>• WE HOLD THE KEY</p>
+              <p>• FOR SERVICE TO OUR WORLD</p>
+
+              <p className="uppercase font-bold text-primary-100">
+                Our Name Tells Our Story
+              </p>
+              <p>• WE’RE MADUKA VARSITY</p>
+              <p>• A PLACE FOR A GREAT VISION</p>
+              <p>• FOR PEOPLE ARE THE CROWNS</p>
+              <div>
+                <p>• OUR MISSION IS TO RAISE</p>
+                <p>• THE NEXT GENERATION</p>
+                <p>• TO BIRTH INNOVATION</p>
+                <p>• THROUGH QUALITY EDUCATION</p>
+                <p>• WE BUILD THE YOUTHS</p>
+                <p>• FOR A LIFE OF MEANING</p>
+                <p>• IN REAL CONTRIBUTIONS</p>
+                <p>• THAT ALL MUST SEE</p>
+              </div>
+              <div className="flex justify-center mb-10">
+                <div className="bg-secondary-50 border border-gray-200 rounded-2xl p-6 shadow-lg w-full md:w-2/3 lg:w-1/2">
+                  <h3 className="text-xl md:text-2xl font-semibold text-primary-200 mb-3 text-center">
+                    Listen to the Anthem 🎵
+                  </h3>
+                  <audio
+                    controls
+                    className="w-full mt-2 rounded-lg bg-gray-100"
+                  >
+                    <source src="/maduka-anthem.mpeg" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="text-center mt-8">
+          </div>
         </div>
       </section>
     </div>

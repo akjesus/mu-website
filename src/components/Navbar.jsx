@@ -25,7 +25,7 @@ export default function Navbar() {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Blog", href: "/blog" },
-    { name: "Academic Programmes", href: "/courses" },
+    { name: "Academic Programmes", href: "/programmes" },
     { name: "Campus Life", href: "/campus-life" },
     { name: "Prospectus", href: "/prospectus" },
     {
@@ -42,6 +42,10 @@ export default function Navbar() {
     {
       name: "Contact Us",
       href: "/contact",
+    },
+    {
+      name: "Library",
+      href: "https://library.madukauniversity.edu.ng/",
     },
   ];
 

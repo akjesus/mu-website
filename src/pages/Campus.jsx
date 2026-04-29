@@ -194,7 +194,7 @@ export default function Campus() {
       </section>
 
       {/* Campus Gallery Preview */}
-      <section className="py-20 bg-gradient-to-r from-indigo-700 to-blue-600 text-white">
+      <section className="py-20 bg-[#00356B] text-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-6">Campus Gallery</h2>
           <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
@@ -219,10 +219,6 @@ export default function Campus() {
               />
             ))}
           </div>
-          <p className="mt-8 text-sm text-gray-300">
-            * Images are placeholders. Full gallery will be populated from API
-            data.
-          </p>
         </div>
       </section>
     </div>
