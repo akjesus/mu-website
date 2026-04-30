@@ -24,7 +24,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
+    { name: "News", href: "/news" },
     { name: "Academic Programmes", href: "/programmes" },
     { name: "Campus Life", href: "/campus-life" },
     { name: "Prospectus", href: "/prospectus" },
@@ -51,6 +51,9 @@ export default function Navbar() {
       name: "Students Results",
       href: "https://result.madukauniversity.edu.ng/",
     },
+    {name: "CMS",
+      href: "/cms/login",
+    }
   ];
 
   return (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, GraduationCap, Laptop, CreditCard } from "lucide-react";
 import {
@@ -10,9 +10,33 @@ import {
 } from "@headlessui/react";
 import { X } from "lucide-react";
 import clsx from "clsx";
+import { fetchPosts } from "../../API/blog";
+import parse from "html-react-parser";
+import moment from "moment";
 
 export default function Home() {
   const [open, setOpen] = useState(true);
+  const [news, setNews] = useState([]);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  useEffect(() => {
+    const loadNews = async () => {
+      try {
+        const response = await fetchPosts();
+        const posts = response.data.data || [];
+        console.log(response)
+        const latest = [...posts]
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 4);
+        setNews(latest);
+      } catch (error) {
+        console.error("Failed to load news posts:", error);
+      }
+    };
+
+    loadNews();
+  }, []);
+
   return (
     <div className="pt-0">
       {" "}
@@ -295,7 +319,160 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="admission"
+      {/* News Section */}
+      <section id="news" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-10 text-center">Latest News</h2>
+          {news.length > 0 ? (
+            <div className="grid gap-8 lg:grid-cols-4">
+              {news.map((item) => (
+                <article
+                  key={item.id}
+                  className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:shadow-lg"
+                >
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="h-48 w-full object-cover"
+                    />
+                  ) : (
+                    <div className="h-48 w-full bg-slate-100" />
+                  )}
+                  <div className="p-6">
+                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#00356B]">
+                      {item.category || "News"}
+                    </p>
+                    <h3 className="mt-3 text-xl font-semibold text-gray-900">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-gray-600 line-clamp-3">
+                      {parse(item.content?.slice(0, 320) + "...")}
+                    </p>
+                    <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
+                      <span>
+                        {moment(item.createdAt).format("MMMM D, YYYY")}
+                      </span>
+                      <span>{item.author || "Maduka Admin"}</span>
+                    </div>
+                    <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedPost(item)}
+                        className="inline-flex items-center justify-center rounded-2xl bg-[#00356B] px-4 py-2 text-sm font-semibold text-white hover:bg-[#002a55] transition"
+                      >
+                        Read details
+                      </button>
+                      {item.tags?.length > 0 && (
+                        <p className="text-sm text-gray-500">
+                          {item.tags.join(", ")}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-3xl border border-dashed border-gray-300 bg-gray-50 px-8 py-16 text-center text-gray-500">
+              Loading the latest news…
+            </div>
+          )}
+        </div>
+      </section>
+      {/* News detail modal */}
+      <Transition show={Boolean(selectedPost)} appear={true}>
+        <Dialog
+          open={Boolean(selectedPost)}
+          onClose={() => setSelectedPost(null)}
+          className="relative z-[100]"
+        >
+          <DialogBackdrop
+            transition
+            className={clsx([
+              "absolute inset-0 bg-black/40 transition ease-in-out",
+              "data-closed:opacity-0",
+              "data-enter:duration-100 data-enter:data-closed:-translate-x-full",
+              "data-leave:duration-300 data-leave:data-closed:translate-x-full",
+            ])}
+          />
+
+          <div className="fixed inset-0 z-[100] overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-6">
+              <DialogPanel className="relative w-full max-w-3xl transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all">
+                <button
+                  type="button"
+                  onClick={() => setSelectedPost(null)}
+                  className="absolute right-4 top-4 rounded-full p-2 text-gray-500 hover:bg-gray-100"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                <div className="p-6 md:p-8">
+                  <div className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#00356B]">
+                    {selectedPost?.category || "News"}
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-900">
+                    {selectedPost?.title}
+                  </h2>
+                  <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-gray-500">
+                    <span>
+                      {moment(selectedPost?.createdAt).format("MMMM D, YYYY")}
+                    </span>
+                    <span>{selectedPost?.author || "Maduka Admin"}</span>
+                  </div>
+                  {selectedPost?.image ? (
+                    <img
+                      src={selectedPost.image}
+                      alt={selectedPost?.title}
+                      className="mt-6 h-72 w-full rounded-3xl object-cover"
+                    />
+                  ) : (
+                    <div className="mt-6 h-72 w-full rounded-3xl bg-slate-100" />
+                  )}
+                  <div className="mt-6 space-y-6 text-gray-700">
+                    <div className="space-y-2">
+                      <div className="prose prose-sm max-w-none text-gray-700">
+                        {selectedPost?.content
+                          ? parse(selectedPost.content)
+                          : "No details available."}
+                      </div>
+                    </div>
+                    {selectedPost?.tags?.length > 0 && (
+                      <div className="space-y-2">
+                        <p className="text-lg font-semibold text-gray-900">
+                          Tags
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedPost.tags.map((tag, idx) => (
+                            <span
+                              key={idx}
+                              className="rounded-full bg-blue-50 px-3 py-1 text-sm text-blue-800"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="mt-8 text-right">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPost(null)}
+                      className="inline-flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </DialogPanel>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+      {/* Admission Section */}
+      <section
+        id="admission"
         className="relative bg-[#00356B] text-white text-center py-20"
       >
         <h2 className="text-3xl font-bold">
