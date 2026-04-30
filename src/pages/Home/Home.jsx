@@ -24,7 +24,7 @@ export default function Home() {
       try {
         const response = await fetchPosts();
         const posts = response.data.data || [];
-        console.log(response)
+        console.log(response);
         const latest = [...posts]
           .sort((a, b) => new Date(b.date) - new Date(a.date))
           .slice(0, 4);
@@ -399,7 +399,7 @@ export default function Home() {
 
           <div className="fixed inset-0 z-[100] overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-6">
-              <DialogPanel className="relative w-full max-w-3xl transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all">
+              <DialogPanel className="relative w-full max-w-[95vw] sm:max-w-2xl transform overflow-auto rounded-3xl bg-white text-left shadow-xl transition-all">
                 <button
                   type="button"
                   onClick={() => setSelectedPost(null)}
@@ -407,11 +407,11 @@ export default function Home() {
                 >
                   <X className="w-6 h-6" />
                 </button>
-                <div className="p-6 md:p-8">
+                <div className="p-2 sm:p-4 md:p-6 lg:p-8">
                   <div className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#00356B]">
                     {selectedPost?.category || "News"}
                   </div>
-                  <h2 className="text-3xl font-bold text-gray-900">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
                     {selectedPost?.title}
                   </h2>
                   <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-gray-500">
@@ -424,12 +424,12 @@ export default function Home() {
                     <img
                       src={selectedPost.image}
                       alt={selectedPost?.title}
-                      className="mt-6 h-72 w-full rounded-3xl object-cover"
+                      className="mt-6 h-48 sm:h-72 w-full rounded-3xl object-cover"
                     />
                   ) : (
                     <div className="mt-6 h-72 w-full rounded-3xl bg-slate-100" />
                   )}
-                  <div className="mt-6 space-y-6 text-gray-700">
+                  <div className="mt-6 space-y-6 text-gray-700 break-words overflow-x-hidden">
                     <div className="space-y-2">
                       <div className="prose prose-sm max-w-none text-gray-700">
                         {selectedPost?.content
