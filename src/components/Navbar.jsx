@@ -60,7 +60,7 @@ export default function Navbar() {
         <a href="/">
           <div className="flex items-center gap-2">
             <img
-              src="./mulogo.webp"
+              src="/mulogo.webp"
               alt="University Logo"
               className="w-10 h-10 object-cover rounded-full"
             />

@@ -295,8 +295,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section
-        id="admission"
+      <section id="admission"
         className="relative bg-[#00356B] text-white text-center py-20"
       >
         <h2 className="text-3xl font-bold">

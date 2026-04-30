@@ -17,7 +17,11 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-          Swal.fire("Success!", "Your message has been submitted successfully!", "success");
+    Swal.fire(
+      "Success!",
+      "Your message has been submitted successfully!",
+      "success",
+    );
   };
 
   return (
@@ -140,14 +144,14 @@ export default function Contact() {
 
             {/* Google Map Embed */}
             <div className="mt-6">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7924.7372988753295!2d7.506386433862307!3d6.724793436841423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1044c131a634b349%3A0xdfffeb4bdc1aa176!2sMaduka%20University!5e0!3m2!1sen!2sng!4v1777484068593!5m2!1sen!2sng"
-                width="600"
-                height="450"
-                className="rounded-xl border"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
+              <div className="aspect-video w-full">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7924.7372988753295!2d7.506386433862307!3d6.724793436841423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1044c131a634b349%3A0xdfffeb4bdc1aa176!2sMaduka%20University!5e0!3m2!1sen!2sng!4v1777484068593!5m2!1sen!2sng"
+                  className="w-full h-full rounded-xl border"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
             </div>
           </div>
         </div>
