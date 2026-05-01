@@ -18,19 +18,21 @@ export default function Home() {
   const [open, setOpen] = useState(true);
   const [news, setNews] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
+  const [newsLoading, setNewsLoading] = useState(true);
 
   useEffect(() => {
     const loadNews = async () => {
       try {
         const response = await fetchPosts();
         const posts = response.data.data || [];
-        console.log(response);
         const latest = [...posts]
           .sort((a, b) => new Date(b.date) - new Date(a.date))
           .slice(0, 4);
         setNews(latest);
       } catch (error) {
         console.error("Failed to load news posts:", error);
+      } finally {
+        setNewsLoading(false);
       }
     };
 
@@ -323,7 +325,12 @@ export default function Home() {
       <section id="news" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold mb-10 text-center">Latest News</h2>
-          {news.length > 0 ? (
+          {newsLoading ? (
+            <div className="text-center">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border-4 border-[#00356B] border-t-transparent animate-spin" />
+              <p className="mt-4 text-gray-600">Loading news...</p>
+            </div>
+          ) : news.length > 0 ? (
             <div className="grid gap-8 lg:grid-cols-4">
               {news.map((item) => (
                 <article

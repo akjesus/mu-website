@@ -48,7 +48,7 @@ export default function Footer() {
         </div>
       </div>
       <p className="text-center text-gray-500 mt-8">
-        © {new Date().getFullYear()} Maduka University. All rights reserved. Powered by ICT Diectorate
+        © {new Date().getFullYear()} Maduka University. All rights reserved. Powered by ICT Directorate
       </p>
     </footer>
   );

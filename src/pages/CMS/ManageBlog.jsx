@@ -42,7 +42,7 @@ export default function ManageBlog() {
     _id: "",
     id: "",
     title: "",
-    category: "News",
+    category: "",
     content: "",
     image: "",
     tags: "",
@@ -77,7 +77,7 @@ export default function ManageBlog() {
       _id: "",
       id: "",
       title: "",
-      category: "News",
+      category: "",
       content: "",
       imageUrl: "",
       tags: "",
@@ -553,12 +553,13 @@ export default function ManageBlog() {
                       onChange={handleChange}
                       className="w-full rounded-2xl border border-gray-200 px-4 py-3 focus:border-[#00356B] focus:outline-none"
                     >
-                      <option>News</option>
-                      <option>Education</option>
-                      <option>Research</option>
-                      <option>Events</option>
-                      <option>Alumni</option>
-                      <option>Campus Life</option>
+                      <option value="">Select a category</option>
+                      <option value="Campus Life">Campus Life</option>
+                      <option value="News">News</option>
+                      <option value="Education">Education</option>
+                      <option value="Research">Research</option>
+                      <option value="Events">Events</option>
+                      <option value="Alumni">Alumni</option>
                     </select>
                   </div>
                 </div>
@@ -572,7 +573,7 @@ export default function ManageBlog() {
                       type="file"
                       accept="image/*"
                       onChange={handleImageChange}
-                      className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 focus:border-[#00356B] focus:outline-none"
+                      className="w-full rounded-2xl border border-gray-200 bg-[#00356B] px-4 py-3 text-sm text-white focus:border-[#00356B] focus:outline-none"
                     />
                     {form.imageUrl && (
                       <img
@@ -605,9 +606,7 @@ export default function ManageBlog() {
                     tinymceScriptSrc="/tinymce/tinymce.min.js"
                     licenseKey="gpl"
                     onInit={(_evt, editor) => (editorRef.current = editor)}
-                    initialValue={
-                      form.content || "Type or Paste blog post here ..."
-                    }
+                    value={form.content || ""}
                     init={{
                       height: 300,
                       menubar: true,
@@ -656,6 +655,12 @@ export default function ManageBlog() {
                   </button>
                   <button
                     type="submit"
+                    disabled={
+                      !form.title ||
+                      !form.content ||
+                      !form.tags ||
+                      !form.category
+                    }
                     className="inline-flex items-center justify-center rounded-2xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700 transition"
                   >
                     {isEditing ? "Update Post" : "Create Post"}

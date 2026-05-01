@@ -8,6 +8,8 @@ export default function Navbar() {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
+  const isActive = (href) => location.pathname === href;
+
   const navigationItems = [
     { label: "E-Portal", href: "/portal" },
     { label: "E-Learning", href: "https://elearn.madukauniversity.edu.ng/" },
@@ -51,9 +53,7 @@ export default function Navbar() {
       name: "Students Results",
       href: "https://result.madukauniversity.edu.ng/",
     },
-    {name: "CMS",
-      href: "/cms/login",
-    }
+    { name: "CMS", href: "/cms/login" },
   ];
 
   return (
@@ -76,14 +76,35 @@ export default function Navbar() {
           </div>
         </a>
 
+        {/* Medium Menu */}
+        <div className="hidden md:flex lg:hidden flex-wrap justify-center gap-2 p-2">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className={`text-gray-700 font-medium hover:text-blue-600 transition text-sm ${
+                isActive(link.href)
+                  ? "text-white bg-[#00356B] px-2 py-1 rounded"
+                  : ""
+              }`}
+            >
+              {link.name.toLocaleUpperCase()}
+            </a>
+          ))}
+        </div>
+
         {/* Desktop Menu */}
-        <nav className="hidden md:flex flex-col space-y-2">
+        <nav className="hidden lg:flex flex-col space-y-2">
           <div className="flex space-x-8">
             {navLinks.slice(0, 7).map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-700 font-medium hover:text-blue-600 transition"
+                className={`text-gray-700 font-medium hover:text-blue-600 transition ${
+                  isActive(link.href)
+                    ? "text-white bg-[#00356B] px-2 py-1 rounded"
+                    : ""
+                }`}
               >
                 {link.name.toLocaleUpperCase()}
               </a>
@@ -94,7 +115,11 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-700 font-medium hover:text-blue-600 transition"
+                className={`text-gray-700 font-medium hover:text-blue-600 transition ${
+                  isActive(link.href)
+                    ? "text-blue-800 bg-blue-100 px-2 py-1 rounded"
+                    : ""
+                }`}
               >
                 {link.name.toLocaleUpperCase()}
               </a>
@@ -120,7 +145,9 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-gray-700 font-medium hover:text-blue-600 text-center py-2 px-3 rounded hover:bg-gray-100 transition"
+                className={`text-gray-700 font-medium hover:text-blue-600 text-center py-2 px-3 rounded hover:bg-gray-100 transition ${
+                  isActive(link.href) ? "text-white bg-[#00356B]" : ""
+                }`}
               >
                 {link.name}
               </a>
