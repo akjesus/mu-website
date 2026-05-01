@@ -1,14 +1,16 @@
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 py-10">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-        <div>
-          <img
-            src="/mulogo.webp"
-            alt="logo"
-            className="w-10 h-10 object-cover rounded-full"
-          />
-          <h3 className="text-xl font-bold text-white">Maduka University</h3>
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-center md:text-left">
+        <div className="flex flex-col items-center md:items-start">
+          <div className="flex items-center space-x-2">
+            <img
+              src="/mulogo.webp"
+              alt="logo"
+              className="w-10 h-10 object-cover rounded-full"
+            />
+            <h3 className="text-xl font-bold text-white">Maduka University</h3>
+          </div>
           <p className="mt-3 text-gray-400">
             Building the future of education with technology and innovation.
           </p>
