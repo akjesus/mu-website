@@ -58,7 +58,7 @@ export default function Campus() {
       {/* Campus Facilities */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#00356B]">
             Campus Facilities
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -98,7 +98,7 @@ export default function Campus() {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <facility.icon className="w-12 h-12 text-blue-600 mb-4" />
+                  <facility.icon className="w-12 h-12 text-[#00356B] mb-4" />
                   <h3 className="text-xl font-semibold mb-3">
                     {facility.title}
                   </h3>
@@ -113,7 +113,7 @@ export default function Campus() {
       {/* Student Activities */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#00356B]">
             Student Activities
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -159,7 +159,7 @@ export default function Campus() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition"
               >
-                <activity.icon className="w-12 h-12 text-indigo-600 mb-4" />
+                <activity.icon className="w-12 h-12 text-[#00356B] mb-4" />
                 <h3 className="text-xl font-semibold mb-3">{activity.title}</h3>
                 <p className="text-gray-600 mb-4">{activity.desc}</p>
                 <ul className="text-sm text-gray-500 space-y-1">
@@ -176,7 +176,7 @@ export default function Campus() {
       {/* Student Testimonials */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#00356B]">
             What Students Say
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
@@ -189,8 +189,8 @@ export default function Campus() {
                 image: "/images/stu1.jpg",
               },
               {
-                name: "Michael Chen",
-                program: "Business Administration",
+                name: "Michael Ugwu",
+                program: "Cyber Security",
                 quote:
                   "The sports facilities and student clubs keep campus life exciting. Between studying and extracurriculars, there's never a dull moment. The support from faculty is amazing.",
                 image:
@@ -211,8 +211,10 @@ export default function Campus() {
                     className="w-12 h-12 rounded-full mr-4"
                   />
                   <div>
-                    <h4 className="font-semibold">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-500">
+                    <h4 className="font-semibold text-[#00356B]">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-sm text-black-500">
                       {testimonial.program}
                     </p>
                   </div>
@@ -227,7 +229,7 @@ export default function Campus() {
       {/* Campus Life Stories */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#00356B]">
             Campus Life Stories
           </h2>
           {storiesLoading ? (

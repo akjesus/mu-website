@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { BookOpen, GraduationCap, Laptop, CreditCard } from "lucide-react";
+import {
+  BookOpen,
+  GraduationCap,
+  Laptop,
+  CreditCard,
+  House,
+} from "lucide-react";
 import {
   Dialog,
   DialogBackdrop,
@@ -102,31 +108,33 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-6">Why Choose Maduka?</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-[#00356B]">
+            Why Choose Maduka UNiversity?
+          </h2>
+          <p className="text-black-600 max-w-3xl mx-auto">
             Our university offers top-notch education programs, expert faculty,
             modern infrastructure, and a global community to help you achieve
             your dreams.
           </p>
           <div className="mt-12 grid md:grid-cols-3 gap-8">
             <div className="p-6 bg-white shadow rounded-2xl">
-              <GraduationCap className="w-12 h-12 text-blue-600 mx-auto" />
+              <GraduationCap className="w-12 h-12 text-[#00356B] mx-auto" />
               <h3 className="mt-4 text-xl font-semibold">Expert Facilities</h3>
-              <p className="mt-2 text-gray-600">
+              <p className="mt-2 text-[#00356B]">
                 Learn from experienced professors and industry leaders.
               </p>
             </div>
             <div className="p-6 bg-white shadow rounded-2xl">
-              <Laptop className="w-12 h-12 text-indigo-600 mx-auto" />
+              <House className="w-12 h-12 text-[#00356B] mx-auto" />
               <h3 className="mt-4 text-xl font-semibold">Serene Environment</h3>
-              <p className="mt-2 text-gray-600">
+              <p className="mt-2 text-[#00356B]">
                 Flexible and interactive online classes for all courses.
               </p>
             </div>
             <div className="p-6 bg-white shadow rounded-2xl">
-              <CreditCard className="w-12 h-12 text-green-600 mx-auto" />
+              <CreditCard className="w-12 h-12 text-[#00356B] mx-auto" />
               <h3 className="mt-4 text-xl font-semibold">Easy Admissions</h3>
-              <p className="mt-2 text-gray-600">
+              <p className="mt-2 text-[#00356B]">
                 Apply and pay your admission fees securely with Paystack.
               </p>
             </div>
@@ -136,8 +144,10 @@ export default function Home() {
       {/* Campus Life Section */}
       <section id="campus-life" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-10 text-center">Campus Life</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto text-center mb-12">
+          <h2 className="text-3xl font-bold mb-10 text-center text-[#00356B]">
+            Campus Life
+          </h2>
+          <p className="text-black-600 max-w-3xl mx-auto text-center mb-12">
             Stay updated with the latest happenings, events, and activities at
             Maduka University.
           </p>
@@ -173,9 +183,11 @@ export default function Home() {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <h4 className="text-xl font-semibold mb-2">{event.title}</h4>
+                  <h4 className="text-xl font-semibold mb-2 text-[#00356B]">
+                    {event.title}
+                  </h4>
                   <p className="text-sm text-gray-500 mb-3">{event.date}</p>
-                  <p className="text-gray-600">{event.desc}</p>
+                  <p className="text-black-600">{event.desc}</p>
                 </div>
               </div>
             ))}
@@ -193,8 +205,10 @@ export default function Home() {
       </section>
       <section id="campus-tour" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-10 text-center">Campus Tour</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto text-center mb-12">
+          <h2 className="text-3xl font-bold mb-10 text-center text-[#00356B]">
+            Campus Tour
+          </h2>
+          <p className="text-black-600 max-w-3xl mx-auto text-center mb-12">
             Take a virtual tour around Maduka University.
           </p>
           <div className="relative w-full px-4 md:px-6 lg:px-8 flex justify-center">
@@ -216,7 +230,9 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Maduka Business School</h2>
+            <h2 className="text-3xl font-bold mb-4 text-[#00356B]">
+              Maduka Business School
+            </h2>
             <p className="text-black-600 max-w-3xl mx-auto">
               At Maduka University Business School (MUBS), we cultivate
               visionary leaders equipped with knowledge, skills, data-driven
@@ -231,7 +247,7 @@ export default function Home() {
               <h3 className="text-2xl font-semibold mb-6 text-[#00356B]">
                 Why Choose Maduka Business School?
               </h3>
-              <ul className="space-y-4 text-gray-700">
+              <ul className="space-y-4 text-black-700">
                 <li className="flex items-start">
                   <span className="text-green-500 mr-3">✓</span>
                   Accredited programs with industry recognition
@@ -275,7 +291,7 @@ export default function Home() {
       {/* Academic Programmes Section */}
       <section id="academics" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-10 text-center">
+          <h2 className="text-3xl font-bold mb-10 text-center text-[#00356B]">
             Our Faculties
           </h2>
 
@@ -312,7 +328,7 @@ export default function Home() {
                   key={index}
                   className="p-6 bg-white border rounded-2xl shadow hover:shadow-lg transition"
                 >
-                  <BookOpen className="w-12 h-12 text-indigo-600 mx-auto" />
+                  <BookOpen className="w-12 h-12 text-[#00356B] mx-auto" />
                   <h4 className="mt-4 text-xl font-semibold">{course.name}</h4>
                   <p className="mt-2 text-gray-600">{course.desc}</p>
                 </div>
@@ -347,13 +363,13 @@ export default function Home() {
                     <div className="h-48 w-full bg-slate-100" />
                   )}
                   <div className="p-6">
-                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#00356B]">
+                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#00356B] text-center">
                       {item.category || "News"}
                     </p>
-                    <h3 className="mt-3 text-xl font-semibold text-gray-900">
+                    <h3 className="mt-3 text-xl font-semibold text-gray-900 text-center">
                       {item.title}
                     </h3>
-                    <p className="mt-3 text-gray-600 line-clamp-3">
+                    <p className="mt-3 text-gray-600 line-clamp-3 text-center">
                       {parse(item.content?.slice(0, 320) + "...")}
                     </p>
                     <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
@@ -363,19 +379,19 @@ export default function Home() {
                       <span>{item.author || "Maduka Admin"}</span>
                     </div>
                     <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedPost(item)}
-                        className="inline-flex items-center justify-center rounded-2xl bg-[#00356B] px-4 py-2 text-sm font-semibold text-white hover:bg-[#002a55] transition"
-                      >
-                        Read details
-                      </button>
                       {item.tags?.length > 0 && (
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-[#00356B]">
                           {item.tags.join(", ")}
                         </p>
                       )}
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPost(item)}
+                      className="w-full inline-flex items-center justify-center rounded-2xl bg-[#00356B] px-4 py-2 text-sm font-semibold text-white hover:bg-[#002a55] transition"
+                    >
+                      Read details
+                    </button>
                   </div>
                 </article>
               ))}
