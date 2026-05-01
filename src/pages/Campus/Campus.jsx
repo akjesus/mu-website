@@ -1,7 +1,39 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Home, Utensils, Trophy, Users, Camera, Heart } from "lucide-react";
+import { fetchPosts } from "../../API/blog";
+import parse from "html-react-parser";
+import moment from "moment";
 
 export default function Campus() {
+  const [campusStories, setCampusStories] = useState([]);
+  const [storiesLoading, setStoriesLoading] = useState(true);
+
+  useEffect(() => {
+    const loadCampusStories = async () => {
+      try {
+        const response = await fetchPosts();
+        const posts = response.data.data || [];
+        const filtered = posts
+          .filter(
+            (post) =>
+              post.category?.toLowerCase().includes("campus") ||
+              post.tags?.some((tag) => tag.toLowerCase().includes("campus")) ||
+              post.title.toLowerCase().includes("campus"),
+          )
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .slice(0, 3);
+        setCampusStories(filtered);
+      } catch (error) {
+        console.error("Failed to load campus stories:", error);
+      } finally {
+        setStoriesLoading(false);
+      }
+    };
+
+    loadCampusStories();
+  }, []);
+
   return (
     <div className="bg-gray-50 min-h-screen pt-16">
       {/* Hero Section */}
@@ -154,8 +186,7 @@ export default function Campus() {
                 program: "Computer Science",
                 quote:
                   "Maduka University has been an incredible journey. The campus facilities are top-notch, and the community is so welcoming. I've made lifelong friends and gained invaluable skills.",
-                image:
-                  "/images/stu1.jpg",
+                image: "/images/stu1.jpg",
               },
               {
                 name: "Michael Chen",
@@ -193,6 +224,82 @@ export default function Campus() {
         </div>
       </section>
 
+      {/* Campus Life Stories */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Campus Life Stories
+          </h2>
+          {storiesLoading ? (
+            <div className="text-center">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border-4 border-[#00356B] border-t-transparent animate-spin" />
+              <p className="mt-4 text-gray-600">Loading stories...</p>
+            </div>
+          ) : campusStories.length > 0 ? (
+            <div className="grid md:grid-cols-3 gap-8">
+              {campusStories.map((story, index) => (
+                <motion.div
+                  key={story._id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition"
+                >
+                  {story.image && (
+                    <img
+                      src={story.image}
+                      alt={story.title}
+                      className="w-full h-48 object-cover"
+                    />
+                  )}
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#00356B]">
+                        {story.category}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        {moment(story.createdAt).format("MMM D, YYYY")}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      {story.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                      {story.excerpt ||
+                        (typeof story.content === "string"
+                          ? parse(story.content.substring(0, 100))
+                          : story.content)}
+                    </p>
+                    {story.tags && story.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {story.tags.slice(0, 2).map((tag, idx) => (
+                          <span
+                            key={idx}
+                            className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <div className="text-sm text-gray-500">
+                      By {story.author || "Maduka Admin"}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">
+                No campus life stories yet. Check back soon for exciting student
+                experiences!
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* Campus Gallery Preview */}
       <section className="py-20 bg-[#00356B] text-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
@@ -204,7 +311,7 @@ export default function Campus() {
           <div className="grid md:grid-cols-4 gap-4">
             {[
               "https://images.unsplash.com/photo-1564981797816-1043664bf78d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-             "/images/stu2.jpg",
+              "/images/stu2.jpg",
               "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
               "https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
             ].map((image, index) => (

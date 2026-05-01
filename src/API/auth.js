@@ -1,10 +1,16 @@
 import axios from "axios";
 
-const API_BASE_URL = "api.cms.madukauniversity.edu.ng/api/v1/post";
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 
 export const login = async (email, password) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+    const response = await api.post("/auth/login", {
       email,
       password
     });
@@ -16,7 +22,7 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
   try {
-    await axios.post(`${API_BASE_URL}/auth/logout`);
+    await api.post("/auth/logout");
   } catch (error) {
     throw new Error("Logout failed");
   }

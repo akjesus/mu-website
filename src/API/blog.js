@@ -1,6 +1,6 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "https://api.cms.madukauniversity.edu.ng",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -9,7 +9,7 @@ const api = axios.create({
 
 
 export const fetchPosts = () => {
-  return api.get("/api/v1/post", {
+  return api.get("/post", {
     headers: {
       "Content-Type": "application/json",
     },
@@ -17,7 +17,7 @@ export const fetchPosts = () => {
 };
 
 export const createPost = (formData) => {
-  return api.post("/api/v1/post", formData, {
+  return api.post("/post", formData, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -25,7 +25,7 @@ export const createPost = (formData) => {
 };
 
 export const updatePost = (postId, postData) => {
-  return api.put(`/api/v1/post/${postId}`, postData, {
+  return api.put(`/post/${postId}`, postData, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -34,7 +34,7 @@ export const updatePost = (postId, postData) => {
 
 
 export const deletePost = (postId) => {
-  return api.delete(`/api/v1/post/${postId}`, {
+  return api.delete(`/post/${postId}`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -42,7 +42,7 @@ export const deletePost = (postId) => {
 };
 
 export const getPost = (id) => {
-  return api.get(`/api/v1/post/${id}`, {
+  return api.get(`/post/${id}`, {
     headers: {
       "Content-Type": "application/json",
     },

@@ -10,7 +10,7 @@ export default function Courses() {
       duration: "5 Years",
       price: "₦900,000 / year",
       teacher: "Dr. Asha Verma",
-      img: "https://media.istockphoto.com/id/1395428816/photo/group-of-young-people-in-technical-vocational-training-with-teacher.jpg?s=612x612&w=0&k=20&c=pG8hCoqokgF-szNZJjDrqi-4gxYKRxth-RcyG2wI9u8=",
+      img: "/images/engineering.jpg",
     },
     {
       title: "Faculty of Business & Social Sciences",
@@ -19,7 +19,7 @@ export default function Courses() {
       duration: "3 Years",
       price: "₦800,000 / year",
       teacher: "Prof. Raj Malhotra",
-      img: "https://www.shutterstock.com/image-photo/mba-master-business-administration-program-600nw-2434045027.jpg",
+      img: "/images/business.jpg",
     },
     {
       title: "Faculty of Nursing Sciences",
@@ -28,7 +28,7 @@ export default function Courses() {
       duration: "4 Years",
       price: " ₦1,710,000 / year",
       teacher: "Dr. Neha Sharma",
-      img: "https://www.kdnuggets.com/wp-content/uploads/awan_7_free_data_science_platform_beginners_1.png",
+      img: "/images/nursing.jpg",
     },
     {
       title: "Faculty of Law",
@@ -37,7 +37,7 @@ export default function Courses() {
       duration: "5 Years",
       price: "₦1,710,000 / year",
       teacher: "Dr. Priya Kapoor",
-      img: "https://thumbs.dreamstime.com/b/counseling-young-women-one-attendants-psychological-course-77250783.jpg",
+      img: "/images/law.jpg",
     },
     {
       title: "College of Medical & Health Sciences",
@@ -45,7 +45,7 @@ export default function Courses() {
       duration: "5 Years",
       price: "₦4,210,000 / year",
       teacher: "Prof. Anil Mehra",
-      img: "https://media.istockphoto.com/id/1395428816/photo/group-of-young-people-in-technical-vocational-training-with-teacher.jpg?s=612x612&w=0&k=20&c=pG8hCoqokgF-szNZJjDrqi-4gxYKRxth-RcyG2wI9u8=",
+      img: "/images/medicine.jpg",
     },
     {
       title: "Faculty of Pharmacy",
@@ -54,7 +54,7 @@ export default function Courses() {
       duration: "5 Years",
       price: "₦1,710,000 / year",
       teacher: "Ms. Kavita Nair",
-      img: "https://blog-frontend.envato.com/cdn-cgi/image/width=2400,quality=75,format=auto/uploads/sites/2/2023/02/Tuts_Roundup__Top_Graphic_Design_Courses.jpeg",
+      img: "/images/pharmacy.jpg",
     },
   ];
 

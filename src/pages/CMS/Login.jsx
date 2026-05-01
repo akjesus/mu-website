@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, Lock } from "lucide-react";
+import { Mail, Lock, LoaderCircle, Eye, EyeClosedIcon } from "lucide-react";
 import Swal from "sweetalert2";
+import { login } from "../../API/auth";
 
 const validUser = {
   email: "admin@madukauniversity.edu.ng",
@@ -11,6 +12,8 @@ const validUser = {
 
 export default function Login() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const [authenticated, setAuthenticated] = useState(
     () => localStorage.getItem("cms-auth") === "true",
@@ -26,22 +29,33 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    if (
-      form.email === validUser.email &&
-      form.password === validUser.password
-    ) {
-      localStorage.setItem("cms-auth", "true");
-      setAuthenticated(true);
-      Swal.fire("Welcome!", "You are now authenticated.", "success");
-      return;
+    try {
+      const res = await login(form.email, form.password);
+      if (res.success) {
+        localStorage.setItem("cms-auth", "true");
+        setAuthenticated(true);
+        Swal.fire("Welcome!", "You are now authenticated.", "success");
+        return;
+      } else {
+        Swal.fire(
+          "Authentication Failed",
+          "Please enter valid credentials.",
+          "error",
+        );
+        console.error("Login failed:", res.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      Swal.fire(
+        "Authentication Failed",
+        "An error occurred while authenticating.",
+        "error",
+      );
     }
-    Swal.fire(
-      "Authentication Failed",
-      "Please enter valid credentials.",
-      "error",
-    );
+    setLoading(false);
   };
 
   return (
@@ -92,22 +106,43 @@ export default function Login() {
                     <Lock className="w-5 h-5" />
                   </span>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     value={form.password}
                     onChange={handleChange}
-                    className="w-full rounded-xl border-none bg-transparent py-3 pl-12 pr-4 focus:outline-none"
+                    className="w-full rounded-xl border-none bg-transparent py-3 pl-12 pr-12 focus:outline-none"
                     placeholder="Enter your password"
                     required
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-500 hover:text-gray-700 focus:outline-none"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeClosedIcon className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
+                  </button>
                 </div>
               </div>
 
               <button
                 type="submit"
                 className="w-full rounded-2xl bg-[#00356B] px-6 py-3 text-white font-semibold shadow-md hover:bg-[#002a55] transition"
+                disabled={loading}
               >
-                Sign In
+                {loading ? (
+                  <div className="flex items-center justify-center">
+                    <LoaderCircle className="animate-spin" />
+                  </div>
+                ) : (
+                  "Sign In"
+                )}
               </button>
               <button
                 type="button"

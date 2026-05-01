@@ -31,6 +31,7 @@ export default function ManageBlog() {
     () => localStorage.getItem("cms-auth") === "true",
   );
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState("create");
   const [selectedPost, setSelectedPost] = useState(null);
@@ -38,6 +39,7 @@ export default function ManageBlog() {
   const [postsPerPage] = useState(10);
   const [file, setFile] = useState(null);
   const [form, setForm] = useState({
+    _id: "",
     id: "",
     title: "",
     category: "News",
@@ -54,11 +56,14 @@ export default function ManageBlog() {
 
   useEffect(() => {
     const loadPosts = async () => {
+      setLoading(true);
       try {
         const postsData = await fetchPosts();
         setPosts(postsData.data.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -69,6 +74,7 @@ export default function ManageBlog() {
 
   const resetForm = () => {
     setForm({
+      _id: "",
       id: "",
       title: "",
       category: "News",
@@ -86,6 +92,7 @@ export default function ManageBlog() {
     } else if (mode === "edit" && post) {
       setForm({
         ...post,
+        _id: post._id || post.id || "",
         imageUrl: post.imageUrl || "",
         tags: post.tags ? post.tags.join(", ") : "",
       });
@@ -119,7 +126,7 @@ export default function ManageBlog() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.title  || !form.content || !form.tags) {
+    if (!form.title || !form.content || !form.tags) {
       Swal.fire("Incomplete", "Please fill in all fields.", "warning");
       return;
     }
@@ -136,19 +143,20 @@ export default function ManageBlog() {
       formData.append("category", formattedPost.category);
       formData.append("content", formattedPost.content);
       formData.append("tags", formattedPost.tags);
-      formData.append('image', file)
+      formData.append("image", file);
       if (isEditing) {
         setPosts((current) =>
           current.map((post) =>
-            post.id === form.id ? { ...post, ...formattedPost } : post,
+            post._id === form._id ? { ...post, ...formattedPost } : post,
           ),
         );
         Swal.fire("Updated!", "Blog post updated successfully.", "success");
       } else {
-        console.log(formData.get('image'));
+        console.log(formData.get("image"));
         const res = await createPost(formData);
-        setPosts((current) => [res.data, ...current]);
-        console.log("Post created:", res.data);
+        const createdPost = res.data?.data ?? res.data;
+        setPosts((current) => [createdPost, ...current]);
+        console.log("Post created:", createdPost);
         Swal.fire("Created!", "Blog post created successfully.", "success");
       }
     } catch (error) {
@@ -251,10 +259,9 @@ export default function ManageBlog() {
         >
           <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-[#00356B]">Blog Posts</h2>
               <p className="text-gray-600 mt-2">
-                Posts are displayed in a table below. Use the actions to view,
-                edit, or delete.
+                Posts are displayed below. Use the actions to view, edit, or
+                delete.
               </p>
             </div>
             <div className="rounded-2xl bg-blue-50 px-4 py-2 text-blue-800">
@@ -262,8 +269,8 @@ export default function ManageBlog() {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-left">
+          <div className="overflow-x-auto hidden md:block">
+            <table className="min-w-full table-fixed divide-y divide-gray-200 text-left">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">
@@ -271,9 +278,6 @@ export default function ManageBlog() {
                   </th>
                   <th className="px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">
                     Category
-                  </th>
-                  <th className="px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500 hidden lg:table-cell">
-                    Author
                   </th>
                   <th className="px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500 hidden md:table-cell">
                     Date
@@ -286,16 +290,16 @@ export default function ManageBlog() {
               <tbody className="divide-y divide-gray-200 bg-white">
                 {currentPosts.map((post) => (
                   <tr key={post._id}>
-                    <td className="px-4 py-4 align-top max-w-[22rem]">
-                      <div className="font-semibold text-gray-900 truncate max-w-full">
+                    <td className="px-4 py-4 align-top max-w-[22rem] break-words">
+                      <div
+                        onClick={() => openModal("view", post)}
+                        className="font-semibold text-gray-900 hover:cursor-pointer hover:text-[#00356B] transition"
+                      >
                         {post.title}
                       </div>
                     </td>
                     <td className="px-4 py-4 align-top text-gray-600">
                       {post.category}
-                    </td>
-                    <td className="px-4 py-4 align-top text-gray-600 hidden lg:table-cell">
-                      {post.author}
                     </td>
                     <td className="px-4 py-4 align-top text-gray-600 hidden md:table-cell">
                       {moment(post.createdAt).format("MMMM Do YYYY")}
@@ -338,6 +342,58 @@ export default function ManageBlog() {
                 )}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="block md:hidden space-y-4">
+            {currentPosts.map((post) => (
+              <div
+                key={post._id}
+                className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm"
+              >
+                <div className="flex justify-between items-start mb-2">
+                  <div className="flex-1">
+                    <h3
+                      className="font-semibold text-gray-900 text-lg leading-tight hover:cursor-pointer hover:text-[#00356B] transition"
+                      onClick={() => openModal("view", post)}
+                    >
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {post.category} • {post.author} •{" "}
+                      {moment(post.createdAt).format("MMM D, YYYY")}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2 mt-4">
+                  <button
+                    onClick={() => openModal("view", post)}
+                    className="inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 transition flex-1 justify-center"
+                  >
+                    <Eye className="w-4 h-4" />
+                    View
+                  </button>
+                  <button
+                    onClick={() => openModal("edit", post)}
+                    className="inline-flex items-center gap-2 rounded-2xl border border-[#00356B] bg-[#00356B] px-3 py-2 text-sm font-semibold text-white hover:bg-[#002a55] transition flex-1 justify-center"
+                  >
+                    <Edit3 className="w-4 h-4" />
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(post._id)}
+                    className="inline-flex items-center justify-center rounded-2xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700 hover:bg-red-100 transition"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
+            {posts.length === 0 && (
+              <div className="text-center text-gray-500 py-8">
+                No posts yet. Click "Create Post" to add the first entry.
+              </div>
+            )}
           </div>
 
           {posts.length > 0 && (
@@ -399,21 +455,15 @@ export default function ManageBlog() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
-            className="w-full max-w-xl rounded-[2rem] bg-white p-5 shadow-2xl max-h-[90vh] overflow-y-auto"
+            className="w-full max-w-[95vw] sm:max-w-xl rounded-[2rem] bg-white p-4 sm:p-5 shadow-2xl max-h-[90vh] overflow-y-auto"
           >
             <div className="mb-4 flex items-start justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-[0.24em] text-[#00356B]">
+                <p className="text-sm  "></p>
+                <h2 className="mt-2 text-2xl font-bold uppercase  text-[#00356B] tracking-[0.1em]">
                   {modalMode === "create" && "Create New Post"}
                   {modalMode === "edit" && "Edit Post"}
                   {modalMode === "view" && "View Post"}
-                </p>
-                <h2 className="mt-2 text-2xl font-bold text-gray-900">
-                  {modalMode === "view"
-                    ? selectedPost?.title
-                    : isEditing
-                      ? "Update blog post"
-                      : "Start a new post"}
                 </h2>
               </div>
               <button
@@ -463,7 +513,7 @@ export default function ManageBlog() {
                   <div className="rounded-3xl bg-gray-50 p-4">
                     <p className="text-sm text-gray-500">Published</p>
                     <p className="mt-2 font-semibold text-gray-900">
-                      {selectedPost?.date}
+                      {moment(selectedPost?.createdAt).format("MMMM Do YYYY")}
                     </p>
                   </div>
                 </div>
@@ -508,6 +558,7 @@ export default function ManageBlog() {
                       <option>Research</option>
                       <option>Events</option>
                       <option>Alumni</option>
+                      <option>Campus Life</option>
                     </select>
                   </div>
                 </div>
@@ -550,7 +601,7 @@ export default function ManageBlog() {
                     Content
                   </label>
                   <Editor
-                    key={form.id || "new"}
+                    key={form._id || "new"}
                     tinymceScriptSrc="/tinymce/tinymce.min.js"
                     licenseKey="gpl"
                     onInit={(_evt, editor) => (editorRef.current = editor)}
